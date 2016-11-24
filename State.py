@@ -28,7 +28,7 @@ class State:
         destinations = []
         # Retourne toutes les destinations possibles en fonction des voisins de la ville
         for connection in self.city.neighbours:
-            destinations.append((connection[1], connection[0]))
+            destinations.append((connection[1], connection[0])) # La distance est entrée en premier dans les destinations
         return destinations
 
     def apply(self, possibleCity, heuristic, dist):
