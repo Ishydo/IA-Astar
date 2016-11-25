@@ -13,7 +13,7 @@ PRINT_STEPS_MODE = True     # Print frontiere + history each iteration
 ######################################################################
 
 cities = []
-cities_dict = {}
+cities_dict = {} # Juste pour retrouver plus facilement une ville par rapport à son nom (config)
 
 #Astar method
 def astar_search(sourceCityState, targetCity, h_func):
@@ -50,7 +50,7 @@ def astar_search(sourceCityState, targetCity, h_func):
             newCityState = cityState.apply(possibleCity[1], h_func(possibleCity[1], targetCity), possibleCity[0]) # Nouvel état avec la nouvelle ville à visiter, l'heuristique et la distance
             if (newCityState not in history) and newCityState.legal(): # Si cet état n'est pas dans l'historique alors on l'ajoute dans frontière
 
-                # Pour éviter les doublons dans la frontière
+                # Ajouté à la fin : our éviter les doublons dans la frontière
                 present = False
                 for regState in frontiere:
                     if regState.city.name == newCityState.city.name:
@@ -59,7 +59,7 @@ def astar_search(sourceCityState, targetCity, h_func):
                             frontiere.remove(regState)
                             frontiere.append(newCityState)
                 if(not present):
-                    frontiere.append(newCityState)
+                    frontiere.append(newCityState) # L'ajout final dans la frontière
 
         # Finalement on trie la frontière en fonction de l'attribut f de l'état (f = h + g)
         frontiere = sorted(frontiere, key=operator.attrgetter('f'), reverse=True)
